@@ -1,0 +1,86 @@
+
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Procedural Modeling of Buildings}}  
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-01-30}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Procedural Modeling of Buildings
+    \item \textbf{Authors}: Pascal Müller, Peter Wonka, Simon Haegler, Andreas Ulmer, Luc Van Gool
+    \item \textbf{Affiliations}: ETH Zürich, Arizona State University, K.U. Leuven
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+The paper introduces \textbf{CGA Shape}, a novel shape grammar for procedural modeling of buildings, addressing challenges like geometric consistency, complex shape configurations, and scalable urban models.
+
+\section{Outline of Major Topics}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Introduction}: Discusses procedural modeling and its benefits over traditional techniques.
+    \item \textbf{Shape Grammar Design}: Details CGA Shape, production rules, and context-sensitive modeling strategies.
+    \item \textbf{Applications}: Examples like Pompeii reconstruction and scalability demonstrations.
+    \item \textbf{Discussion}: Comparison with existing methods and open problems.
+\end{enumerate}
+
+\section{Two Things Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item Context-sensitive rules (e.g., occlusion, snapping) ensure realistic building designs.
+    \item Scalability of the system for creating massive urban models with billions of polygons.
+\end{enumerate}
+
+\section{What Did You Not Like About the Paper?}
+\begin{itemize}[noitemsep]
+    \item Lack of focus on potential use cases in architectural design workflows.
+    \item Steep learning curve for non-technical users.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item How does CGA Shape handle irregular building footprints in GIS data?
+    \item Can the grammar dynamically adapt rules based on real-world constraints (e.g., material costs)?
+\end{enumerate}
+
+\end{document}
