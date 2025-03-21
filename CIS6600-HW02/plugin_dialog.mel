@@ -1,0 +1,79 @@
+global proc createLSystemNode() {
+	createNode transform -n LSystem1;
+	createNode mesh -n LSystemShape1 -p LSystem1;
+	sets -add initialShadingGroup LSystemShape1;
+	createNode LSystemNode -n LSystemNode1;
+	connectAttr time1.outTime LSystemNode1.time;
+	connectAttr LSystemNode1.outputMesh LSystemShape1.inMesh;
+};
+
+global proc createWindow()
+{
+	global string $grammarS;
+    global string $stepSizeS;
+    global string $angleS;
+    global string $iterS;
+	string $window = `window -title "My LSystem" -widthHeight 400 300 -titleBar true -backgroundColor 1.0 1.0 1.0`;
+	frameLayout -label "Enter Grammar Strings" -collapsable false -collapse false;
+		$grammarS = `scrollField -wordWrap true -text "F\nF -> FF+[+F-F-F]-[-F+F+F]"`;
+		button -label "Browse" -width 25 -height 25 -align "right" -command "browse()";
+	setParent ..;
+	frameLayout -label "LSystem Parameters" -collapsable false -collapse false;
+		columnLayout;
+			$iterS = `intSliderGrp -label "Iterations" -field true -minValue 1 -maxValue 100 -fieldMinValue 1 -fieldMaxValue 100 -value 2` ;
+			$stepSizeS = `floatSliderGrp -label "Default Step Size" -field true -minValue 0.0 -maxValue 50.0 -fieldMinValue 0.0 -fieldMaxValue 50.0 -value 5.0` ;
+			$angleS = `floatSliderGrp -label "Default Angle" -field true -minValue 0.0 -maxValue 180.0 -fieldMinValue 0.0 -fieldMaxValue 180.0 -value 45` ;
+		setParent ..;
+	setParent ..;
+
+	rowLayout -numberOfColumns 2 -columnWidth2 100 100;
+		button -label "Create" -width 60 -height 30 -align "right" -command ("create()");
+		button -label "Cancel" -width 60 -height 30 -align "left" -command ("deleteUI -window " + $window);
+	setParent ..;
+
+	showWindow;
+};
+
+global proc browse() {
+	global string $grammarS;
+	string $filename = `fileDialog -m 0`;
+	int $fileid;
+	$fileid = fopen($filename, "r");
+	string $wholeFile = "";
+	string $nextLine = `fgetline $fileid`;
+	while(size($nextLine) > 0)
+	{
+		$wholeFile = $wholeFile + $nextLine;
+		$nextLine = `fgetline $fileid`;
+	}
+	scrollField -edit -text $wholeFile $grammarS;;
+}
+
+global proc create() {
+	global string $grammarS;
+    global string $stepSizeS;
+    global string $angleS;
+    global string $iterS;
+    // if($grammar == "") {
+    //     warning("Grammar is empty. Cannot create L-System.");
+    //     return;
+    // }
+	string $currentGrammar = `scrollField -query -text $grammarS`;
+	int $currentIterValue = `intSliderGrp -query -value $iterS`;
+    float $currentStepSizeValue = `floatSliderGrp -query -value $stepSizeS`;
+    float $currentAngleValue = `floatSliderGrp -query -value $angleS`;
+
+	print("The currentGrammar is: " + $currentGrammar + "\n");
+	print("The currentIterValue is: " + $currentIterValue + "\n");
+	print("The currentStepSizeValue is: " + $currentStepSizeValue + "\n");
+	print("The currentAngleValue is: " + $currentAngleValue + "\n");
+    LSystemCmd -ss $currentStepSizeValue -a $currentAngleValue -g $currentGrammar -i $currentIterValue;
+};
+
+
+// Setting up the Layout of the Plugin (where the plugin resides)
+global string $gMainWindow;
+setParent $gMainWindow;
+menu -label "My LSystem" -parent $gMainWindow -tearOff on LSystemMenu;
+menuItem -label "LSystemCommand" -command ("createWindow");
+menuItem -label "LSystemNode" -command ("createLSystemNode()");

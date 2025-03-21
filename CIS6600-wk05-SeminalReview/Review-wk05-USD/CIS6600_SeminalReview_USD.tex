@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{A Brief Introduction to RenderMan}}
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-15}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: A Brief Introduction to RenderMan
+    \item \textbf{Authors}: Saty Raghavachary
+    \item \textbf{Affiliations}:
+    \begin{itemize}[noitemsep]
+        \item Saty Raghavachary: Dreamworks Animation
+    \end{itemize}
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This paper provides a comprehensive introduction to Pixar's RenderMan, a photorealistic rendering system widely used in the animation and visual effects industry. It covers the complete ecosystem of RenderMan, including its historical origins, the RenderMan Interface Specification, the RenderMan Shading Language, the rendering pipeline, shader writing practices, and learning resources. The paper serves as an accessible entry point for understanding this industry-standard rendering system.
+
+\section{Major Topics \& Techniques}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Origins \& Background}:
+    \begin{itemize}[noitemsep]
+        \item Traces RenderMan's development from the University of Utah and Lucasfilm
+        \item Highlights contributions of key figures like Ed Catmull, Loren Carpenter, Rob Cook, and Pat Hanrahan
+    \end{itemize}
+    \item \textbf{Key Components}:
+    \begin{enumerate}[label=\alph*), noitemsep]
+        \item \textbf{RenderMan Interface Specification (RI Spec)}: 
+        \begin{itemize}[noitemsep]
+            \item Defines standard communication between modeling and rendering programs
+            \item Enables separation of modeling and rendering processes
+            \item Various implementations including PRMan, BMRT, and RenderDotC
+        \end{itemize}
+        \item \textbf{RenderMan Shading Language (RSL)}:
+        \begin{itemize}[noitemsep]
+            \item C-like language for custom shader development
+            \item Provides flexible surface and volume appearance definition
+            \item Features comprehensive built-in functions and data types
+        \end{itemize}
+        \item \textbf{RenderMan Pipeline}:
+        \begin{itemize}[noitemsep]
+            \item RIB files for scene description
+            \item Shader development and implementation
+            \item Map generation and management
+        \end{itemize}
+    \end{enumerate}
+    \item \textbf{Shader Types \& Implementation}:
+    \begin{itemize}[noitemsep]
+        \item Surface shaders
+        \item Displacement shaders
+        \item Light shaders
+        \item Atmosphere shaders
+        \item Imager shaders
+    \end{itemize}
+\end{enumerate}
+
+\section{Two Things I Liked}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Clear Pipeline Overview}:
+    \begin{itemize}[noitemsep]
+        \item The paper presents a well-structured explanation of the RenderMan pipeline
+        \item Makes complex concepts accessible to readers with varying technical backgrounds
+    \end{itemize}
+    \item \textbf{Technical Architecture Coverage}:
+    \begin{itemize}[noitemsep]
+        \item Detailed exploration of the RI Spec and RSL showcases system versatility
+        \item Demonstrates the powerful flexibility of RenderMan's architecture
+    \end{itemize}
+\end{enumerate}
+
+\section{One Thing I Did Not Like}
+\begin{itemize}[noitemsep]
+    \item The paper's brevity sometimes comes at the cost of depth, particularly in explaining shader types and mapping techniques. More detailed explanations and practical examples would have enhanced the paper's educational value.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item Could you elaborate on the differences between various RenderMan implementations (PRMan, 3Delight, Aqsis)?
+    \begin{itemize}[noitemsep]
+        \item How do these implementations differ in terms of performance and features?
+        \item What are the trade-offs between different implementations?
+    \end{itemize}
+    \item What is your vision for RenderMan's future evolution?
+    \begin{itemize}[noitemsep]
+        \item How might emerging technologies impact RenderMan's development?
+        \item What new features or capabilities might be incorporated in future versions?
+    \end{itemize}
+\end{enumerate}
+\end{document}

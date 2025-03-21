@@ -1,0 +1,125 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Procedural Modeling of Buildings}}  
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-01-30}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Procedural Modeling of Buildings
+    \item  \textbf{Year}: 2006
+    \item \textbf{Authors}: Pascal Müller, Peter Wonka, Simon Haegler, Andreas Ulmer, Luc Van Gool
+    \item \textbf{Affiliations}: ETH Zürich, Arizona State University, K.U. Leuven
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This paper presents CGA shape, an innovative shape grammar tailored for the procedural generation of architectural forms. The framework facilitates the creation of intricate building exteriors with rich geometric complexity and lifelike detail. It's key contributions includes:
+\begin{itemize}[noitemsep]
+    \item A procedural modeling technique that maintains structural coherence through flexible volumetric forms, regardless of orientation.
+    \item Creation of Context-aware rules that govern dynamic relationships between elements like windows, doors, and terraces, enhancing architectural realism.
+    \item A highly efficient algorithm in generating complex building geometry and facades, which is proving to support scalable and highly complex generation of city geometry. 
+    \item A framework that combines \textbf{mass modeling} and \textbf{facade modeling} for generating surprisingly detailed cities that overcomes the previous limitations of unsatisfied blocking and trimming issues.
+\end{itemize}
+
+\section{Outline of Major Topics}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Introduction}
+    \begin{enumerate}[noitemsep]
+        \item Procedural modeling is an efficient alternative to manual 3D modeling, reducing costs and time.
+        \item The proposed CGA shape grammar generates realistic building shells and facades.
+        \item It enables scalable and adaptive city modeling.
+    \end{enumerate}
+    \item \textbf{CGA Shape Grammar}
+    \begin{enumerate}[noitemsep]
+        \item Extends previous shape grammars (L-systems, Chomsky grammars).
+        \item Proposed a production rule that evolve a city iteratively by first Generate the mass model, then structure the facades, and add windows, doors, floors and ornaments.
+    \end{enumerate}
+    \item \textbf{Mass Modeling}
+    \begin{enumerate}[noitemsep]
+        \item Building masses are generated using scaling, translation, and splits.
+        \item Introduces roof structures, volumetric primitives, and rotations.
+        \item GIS data can be integrated for real-world footprints.
+    \end{enumerate}
+    \item \textbf{Shape Rules and Further Refinement Details}
+    \begin{enumerate}[noitemsep]
+        \item Introduces snap lines to align floors and facades.
+        \item Uses component splits to define edges, faces, vertices for refinement.
+    \end{enumerate}
+    \item \textbf{Implementation of the CGA Shape Grammar}
+    \begin{enumerate}[noitemsep]
+        \item Implementation of the grammar is through C++ based on City Engine Framework
+        \item Optimized data structures: Uses octrees for spatial queries.
+        \item Integration with RenderMan for high-detail rendering.
+    \end{enumerate}
+    
+    \item \textbf{Discussion and Result}
+    \begin{enumerate}[noitemsep]
+        \item Strengths: Allows customization and rule reuse.
+        \item Strengths: Fast generation of massive urban models.
+        \item Weaknesses: Some generated configurations are unrealistic.
+        \item Weaknesses: Complex geometric details still require manual modeling.
+    \end{enumerate}
+    
+
+\end{enumerate}
+
+\section{Two Things Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item The procedural method enables the creation of billions of polygons in a single day, making large-scale city modeling practical and efficient using a generic way based on bounding volumes(mass).
+    \item The occlusion handling and snap-line-based alignment help maintain realism in the generated buildings by avoiding awkward placements of windows, doors, and balconies, which is not observed in previous works that do poorly using single extrusion and extension rules.
+\end{enumerate}
+
+\section{What Did You Not Like About the Paper?}
+\begin{itemize}[noitemsep]
+    \item While the grammar rules ensure some realism, they do not fully model real-world structural stability, which might lead to implausible building structures in certain cases.
+    \item Certain rules are still maintained manually, which establishes some learning curve for latent users. Furthermore, the generated buildings are not as diverse as human-generated ones, which might need further research and investigation.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item How does CGA Shape handle irregular building footprints in GIS data? Could Data-driven methods be utlized some way in creating trustworthy rules and grammars to facillitate this system?
+    \item Does the procedural method account for terrain variations (hills, slopes, or uneven ground), or does it assume a flat environment? 
+\end{enumerate}
+
+\end{document}

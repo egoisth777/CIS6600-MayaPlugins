@@ -1,0 +1,95 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Computer Facial Animation - A Survey}}
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-15}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Computer Facial Animation - A Survey
+    \item \textbf{Authors}: Zhigang Deng, Junyong Noh
+    \item \textbf{Affiliations}:
+    \begin{itemize}[noitemsep]
+        \item Zhigang Deng: Computer Graphics and Interactive Media Lab, Department of Computer Science, University of Houston
+        \item Junyong Noh: Graduate School of Culture Technology, Korea Advanced Institute of Science and Technology
+    \end{itemize}
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This survey paper provides a comprehensive overview of various techniques used in computer facial animation, ranging from classic methods like blend shapes and parameterizations to more advanced approaches such as physics-based muscle modeling and performance-driven animation. It also covers specific areas such as 3D face modeling, visual speech animation, and facial gesture generation, offering a broad perspective on the field and its challenges.
+
+\section{Outline of Major Topics}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Blend Shapes or Shape Interpolation}: Describes the fundamental technique of blend shapes, where facial expressions are created by linearly combining a set of predefined shapes.
+    \item \textbf{Parameterizations}: Discusses parameterization techniques that offer more control over specific facial features and expressions.
+    \item \textbf{Facial Action Coding System (FACS)}: Introduces FACS, a system for describing facial muscle movements and expressions using Action Units (AUs).
+    \item \textbf{Deformation-Based Approaches}: Covers techniques that directly deform the facial mesh, including 2D and 3D morphing, Free-Form Deformation (FFD), and spline-based pseudo muscles.
+    \item \textbf{Physics-Based Muscle Modeling}: Explores methods that simulate the behavior of facial muscles using mass-spring systems, vector representations, and layered spring meshes.
+    \item \textbf{3D Face Modeling}: Discusses techniques for creating realistic 3D face models, including person-specific model creation and anthropometry.
+    \item \textbf{Performance-Driven Facial Animation}: Reviews methods that use tracking data from human actors to drive facial animations.
+    \item \textbf{MPEG-4 Facial Animation}: Describes the MPEG-4 standard for facial animation, which defines Face Definition Parameters (FDPs) and Facial Animation Parameters (FAPs).
+    \item \textbf{Visual Speech Animation}: Discusses techniques for generating realistic lip movements synchronized with speech.
+    \item \textbf{Facial Animation Editing}: Covers tools and techniques for editing facial animations to preserve the naturalness of expressions.
+    \item \textbf{Facial Animation Transferring}: Discusses methods for transferring facial animations between different face models.
+    \item \textbf{Facial Gesture Generation}: Covers techniques for generating realistic eye movements and head motions.
+\end{enumerate}
+
+\section{Things I Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item The paper provides a clear and well-organized overview of the diverse techniques used in computer facial animation, making it a valuable resource for researchers and practitioners in the field.
+    \item The inclusion of numerous figures and tables helps to illustrate the concepts and techniques discussed, making them easier to understand.
+\end{enumerate}
+
+\section{What Did You Not Like About the Paper?}
+\begin{itemize}[noitemsep]
+    \item The paper could benefit from a more in-depth discussion of the limitations and challenges associated with each technique.
+    \item Some sections could be more detailed, particularly those on advanced topics like data-driven speech animation and facial motion transfer.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item What are the most promising avenues for future research in computer facial animation, particularly in addressing the challenges of real-time performance, automation, and adaptability to individual faces?
+    \item How can the different techniques discussed in the paper be effectively combined to create more realistic and expressive facial animations?
+\end{enumerate}
+\end{document}

@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Implicit Skinning: Real-Time Skin Deformation with Contact Modeling}}
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-15}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Implicit Skinning: Real-Time Skin Deformation with Contact Modeling
+    \item \textbf{Authors}: Rodolphe Vaillant, Loïc Barthe, Gaël Guennebaud, Marie-Paule Cani, Damien Rohmer, Brian Wyvill, Olivier Gourmel, Mathias Paulin
+    \item \textbf{Affiliations}:
+    \begin{itemize}[noitemsep]
+        \item Rodolphe Vaillant: IRIT, Université de Toulouse; University of Victoria
+        \item Loïc Barthe: IRIT, Université de Toulouse
+        \item Gaël Guennebaud: Inria Bordeaux
+        \item Marie-Paule Cani: LJK, Grenoble Universités – Inria
+        \item Damien Rohmer: CPE Lyon – Inria
+        \item Brian Wyvill: University of Bath
+        \item Olivier Gourmel: IRIT, Université de Toulouse
+        \item Mathias Paulin: IRIT, Université de Toulouse
+    \end{itemize}
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This paper introduces Implicit Skinning, a novel real-time skin deformation technique that addresses volume loss and self-penetration issues at joints by modeling skin contact and bulging effects in a purely geometric manner. Unlike traditional linear blend skinning (LBS) or dual-quaternion skinning, which are fast but produce unrealistic collapses and interpenetrations, this method uses volumetric implicit surfaces to correct the skinned mesh after standard deformation.
+
+It is the first skinning approach to handle self-contacts (folds) and muscle bulges entirely geometrically in real time, bridging the gap between fast simple skinning and realistic but slower physically based methods. By adjusting each vertex's position via implicit surface constraints (as a post-process to any existing skinning), the technique preserves mesh detail, prevents skin from collapsing or intersecting at bends, and fits seamlessly into standard animation pipelines without requiring heavy collision detection or simulation.
+
+\section{Major Topics \& Techniques}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Implicit Surface Approximation}:
+    \begin{itemize}[noitemsep]
+        \item Each bone and associated skin region modeled by implicit surfaces using HRBF
+        \item Character mesh partitioned by bones using skinning weights
+        \item Smooth scalar fields fitted to approximate sub-mesh shapes
+        \item Additional constraints ensure proper joint boundary transitions
+    \end{itemize}
+    
+    \item \textbf{Field Composition and Contact Modeling}:
+    \begin{itemize}[noitemsep]
+        \item Per-bone implicit fields combined into global field
+        \item Novel gradient-based blending and bulge operators
+        \item Automatic handling of self-contact through field composition
+        \item Joint-angle parametrized bulge effects
+    \end{itemize}
+    
+    \item \textbf{Surface Tracking and Deformation}:
+    \begin{itemize}[noitemsep]
+        \item Initial deformation using dual quaternion skinning
+        \item Vertex projection along field gradients
+        \item Contact detection through gradient direction monitoring
+        \item Iterative Newton-like updates with damping
+    \end{itemize}
+    
+    \item \textbf{Mesh Quality Maintenance}:
+    \begin{itemize}[noitemsep]
+        \item Tangential relaxation to preserve mesh quality
+        \item Adaptive vertex movement toward neighbor centroids
+        \item Localized Laplacian smoothing at contact regions
+        \item Detail preservation in non-contact areas
+    \end{itemize}
+\end{enumerate}
+
+\section{Two Things I Liked}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Real-Time Contact Handling via Implicit Surfaces}:
+    \begin{itemize}[noitemsep]
+        \item Elegant handling of self-collisions without physical simulation
+        \item Automatic generation of contact surfaces during limb folding
+        \item Natural deformation and crease formation at contact points
+    \end{itemize}
+    
+    \item \textbf{Muscle Bulging and Volume Preservation}:
+    \begin{itemize}[noitemsep]
+        \item Gradient-based bulge operator simulates realistic muscle/fat behavior
+        \item Joint-angle controlled volume enhancement
+        \item Artist-controllable bulging effects for enhanced realism
+    \end{itemize}
+\end{enumerate}
+
+\section{One Thing I Did Not Like}
+\begin{itemize}[noitemsep]
+    \item The method's performance and scalability limitations are concerning for high-resolution meshes. Frame rates drop significantly with complex characters (only a few FPS for 170k vertices), making it challenging to use with hero characters or dense meshes. While the quality improvement is substantial, the performance trade-off might be too steep for some production scenarios.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item How could the performance be optimized for complex scenes with many moving bones or extremely detailed meshes?
+    \begin{itemize}[noitemsep]
+        \item Could level-of-detail approaches help maintain higher frame rates?
+        \item What are the main performance bottlenecks in the current implementation?
+    \end{itemize}
+    
+    \item How might this approach be extended to handle external collisions or multi-character contact?
+    \begin{itemize}[noitemsep]
+        \item Could the framework incorporate contact with environment objects?
+        \item What challenges arise when considering interactions between separate characters?
+    \end{itemize}
+\end{enumerate}
+\end{document}

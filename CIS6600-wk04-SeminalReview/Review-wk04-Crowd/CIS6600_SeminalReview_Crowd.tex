@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Continuum Crowds}}
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-15}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Continuum Crowds
+    \item \textbf{Authors}: Adrien Treuille, Seth Cooper, Zoran Popović
+    \item \textbf{Affiliations}:
+    \begin{itemize}[noitemsep]
+        \item Adrien Treuille: University of Washington, Electronic Arts
+        \item Seth Cooper: University of Washington, Electronic Arts
+        \item Zoran Popović: University of Washington, Electronic Arts
+    \end{itemize}
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This paper introduces a continuum-based approach to real-time crowd simulation, offering an alternative to traditional agent-based methods. By modeling crowd movement using continuum dynamics, the authors unify global path planning and local collision avoidance into a single optimization framework. The model uses dynamic potential fields to guide the movement of thousands of individuals, naturally leading to emergent behaviors such as lane formation and vortices, which have been observed in real crowds.
+
+Unlike agent-based models, which compute motion separately for each individual and often struggle with global coordination and congestion, this continuum approach treats crowds as a fluid-like entity, solving for their motion collectively. The result is a real-time capable system that achieves smooth, realistic crowd flow with minimal per-agent computation.
+
+\section{Major Topics \& Techniques}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Motivation \& Background}:
+    \begin{itemize}[noitemsep]
+        \item Traditional agent-based models simulate individual decisions but often suffer from computational inefficiency and myopic behavior, especially in dense crowds.
+        \item The paper proposes a continuum model that treats large groups as density fields evolving under potential functions, leading to real-time, globally coordinated motion.
+    \end{itemize}
+    \item \textbf{Key Algorithmic Components}:
+    \begin{enumerate}[label=\alph*), noitemsep]
+        \item \textbf{Dynamic Potential Fields}: Defines an energy landscape that guides people toward their goals while avoiding congestion and obstacles. It is computed using a fast marching method to solve an Eikonal equation, ensuring globally optimal paths.
+        \item \textbf{Velocity \& Speed Fields}: People move at maximum possible speed, constrained by terrain, obstacles, and congestion, with local crowd flow naturally leading to lane formation.
+        \item \textbf{Density-Based Flow Optimization}: Continuously updates a crowd density field to anticipate and avoid congestion, also introducing a discomfort field to simulate geographic preferences.
+        \item \textbf{Predictive Avoidance}: Incorporates short-horizon anticipation, enabling pedestrians to adjust their paths dynamically in response to moving obstacles.
+    \end{enumerate}
+    \item \textbf{Emergent Behaviors}:
+    \begin{itemize}[noitemsep]
+        \item \textbf{Lane Formation}: Self-organized lanes emerge when opposing crowds pass each other.
+        \item \textbf{Vortex Formation}: Rotating clusters form when groups cross paths, resembling real-world congestion effects.
+        \item \textbf{Adaptive Navigation}: Pedestrians adjust their routes on-the-fly to avoid forthcoming bottlenecks.
+    \end{itemize}
+    \item \textbf{Performance \& Real-Time Applications}:
+    \begin{itemize}[noitemsep]
+        \item The simulation space is discretized into a regular grid, and the method operates at interactive frame rates, handling thousands of agents on a modern CPU.
+        \item Integrated into Electronic Arts' crowd simulation engine, it demonstrates practical scalability and real-time performance.
+    \end{itemize}
+\end{enumerate}
+
+\section{Two Things I Liked}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Unified Global \& Local Path Planning}:
+    \begin{itemize}[noitemsep]
+        \item The continuum approach eliminates the conflicts between local collision avoidance and global navigation seen in agent-based methods.
+        \item This leads to smoother, congestion-aware motion without agents getting trapped in local minima.
+    \end{itemize}
+    \item \textbf{Real-Time Performance for Large Crowds}:
+    \begin{itemize}[noitemsep]
+        \item The algorithm efficiently handles thousands of individuals at interactive frame rates, making it suitable for applications in games, VR, and urban planning.
+        \item The use of fast marching methods and grid-based discretization ensures scalability without the expensive per-agent computations typical of agent-based models.
+    \end{itemize}
+\end{enumerate}
+
+\section{One Thing I Did Not Like}
+\begin{itemize}[noitemsep]
+    \item While the continuum model excels at achieving global coordination, it sacrifices individual behavioral diversity. Unlike agent-based methods, it does not allow for highly personalized movements—such as agents stopping to interact, waiting in line, or forming small sub-groups. Although hybrid approaches combining continuum fields with agent-level decisions might offer a solution, this possibility is not fully explored in the paper.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item How well does this approach scale in highly heterogeneous environments, where individuals have unique movement styles and different goals?
+    \begin{itemize}[noitemsep]
+        \item The model assumes groups share a common objective, but real crowds display a wide range of behaviors.
+        \item Would incorporating agent-level decision making for certain individuals enhance the model's realism?
+    \end{itemize}
+    \item Could this method be extended to simulate extremely dense crowds, such as those encountered during emergency evacuations or in packed stadiums?
+    \begin{itemize}[noitemsep]
+        \item The paper primarily addresses moderate-density flows, yet high-density scenarios involve additional factors like physical forces, pushing, and contact constraints.
+        \item Would integrating force-based crowd physics (e.g., Helbing's social force model) allow for more realistic behavior in these extreme conditions?
+    \end{itemize}
+\end{enumerate}
+\end{document}

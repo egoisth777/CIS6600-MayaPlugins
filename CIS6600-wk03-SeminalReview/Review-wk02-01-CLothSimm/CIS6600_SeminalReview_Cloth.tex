@@ -1,0 +1,120 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Large Steps in Cloth Simulation}}
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-07}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Large Steps in Cloth Simulation
+    \item \textbf{Authors}: David Baraff, Andrew Witkin
+    \item \textbf{Affiliations}: Robotics Institute, Carnegie Mellon University (at publication time), later Pixar Animation Studios
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+The paper introduces a cloth simulation system capable of taking large, stable time steps, a significant improvement over previous methods that required small steps to prevent numerical instability. Its key contributions include:
+\begin{itemize}[noitemsep]
+    \item \textbf{Stable Large Time Steps for Cloth Simulation}: Enables the system to take large, stable time steps, addressing the limitation of traditional small-step methods.
+    \item \textbf{Implicit Integration with Constraint Enforcement}: Combines implicit numerical integration with direct constraint enforcement, ensuring realistic cloth movements and stability.
+    \item \textbf{Sparse Linear System Solved with Modified Conjugate Gradient}: Generates a large sparse linear system per time step, solved efficiently with a modified conjugate gradient method that integrates constraint enforcement without extra penalty forces.
+    \item \textbf{Significant Speedup Over Prior Methods}: Achieves substantial speed improvements, making real-time or near-real-time animation of high-resolution cloth feasible.
+\end{itemize}
+
+\section{Outline of Major Topics}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Background on Cloth Simulation}
+    \begin{enumerate}[noitemsep]
+         \item Discusses previous methods based on explicit integration (Euler, Runge-Kutta) and their limitations with stiff differential equations.
+    \end{enumerate}
+    \item \textbf{Implicit Integration Approach}
+    \begin{enumerate}[noitemsep]
+         \item Uses backward Euler integration to compute stable cloth movements with large time steps.
+         \item Derives a linear system formulation that maintains realism in stretch, shear, and bending forces.
+    \end{enumerate}
+    \item \textbf{Handling Constraints Without Lagrange Multipliers}
+    \begin{enumerate}[noitemsep]
+         \item Introduces a method for direct enforcement of position and velocity constraints without additional penalty forces.
+         \item The conjugate gradient solver ensures that constraints are exactly met regardless of the number of iterations.
+    \end{enumerate}
+    \item \textbf{Sparse System and Solver Efficiency}
+    \begin{enumerate}[noitemsep]
+         \item Modifies the conjugate gradient method to preserve symmetry and dynamically enforce constraints.
+         \item Achieves rapid convergence even for large cloth meshes involving thousands of particles.
+    \end{enumerate}
+    \item \textbf{Adaptive Time Stepping}
+    \begin{enumerate}[noitemsep]
+         \item Step sizes adapt dynamically to prevent divergence.
+         \item Monitors stiff stretch forces and reduces step sizes when instability is detected.
+    \end{enumerate}
+    \item \textbf{Collision Handling}
+    \begin{enumerate}[noitemsep]
+         \item Addresses cloth-cloth and cloth-solid interactions with bounding box collision detection.
+         \item Uses spring-based repulsion for cloth-cloth interactions and directly modifies particle velocity for cloth-solid constraints.
+    \end{enumerate}
+    \item \textbf{Performance Results}
+    \begin{enumerate}[noitemsep]
+         \item Demonstrates simulations on garments with complex wrinkling and folding, applied to both keyframed and motion-captured characters.
+         \item Reports substantial speedups compared to prior methods, with frame times ranging from approximately 2 to 14 seconds depending on resolution.
+    \end{enumerate}
+\end{enumerate}
+
+\section{Two Things Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Efficient Handling of Stiffness and Large Time Steps}: The paper resolves numerical instability with an elegant implicit integration approach, allowing for large, stable time steps and enabling high-resolution cloth simulation.
+    \item \textbf{Constraint Enforcement Without Penalty Terms}: The direct enforcement of constraints improves accuracy and reduces computational overhead compared to traditional penalty-based methods, making the approach practical for real-time applications.
+\end{enumerate}
+
+\section{What Did You Not Like About the Paper?}
+\begin{itemize}[noitemsep]
+    \item \textbf{Assumption of Uniform Material Properties}: The paper does not thoroughly address material variations, as it largely focuses on stiffness adjustments. Real-world cloth often exhibits complex, non-uniform properties that may require further refinement.
+    \item \textbf{Simplified Collision Handling}: The collision detection primarily relies on bounding box methods and simple repulsion forces, which might not capture the complexities of layered or interacting garments.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item Can the system efficiently handle complex layered clothing, such as garments with multiple interacting layers?
+    \item Could an alternative solver, such as multigrid methods, further improve performance for large sparse systems in cloth simulation?
+\end{enumerate}
+
+\end{document}

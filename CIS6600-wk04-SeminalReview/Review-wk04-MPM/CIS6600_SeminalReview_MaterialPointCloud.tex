@@ -1,0 +1,88 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{The Material Point Method for Simulating Continuum Materials}}  
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-15}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: The Material Point Method for Simulating Continuum Materials
+    \item \textbf{Year}: 2016
+    \item \textbf{Authors}: Chenfanfu Jiang (Department of Mathematics, University of California, Los Angeles), Craig Schroeder (Department of Computer Science, University of California, Riverside), Joseph Teran (Department of Mathematics, University of California, Los Angeles), Alexey Stomakhin (Walt Disney Animation Studios), Andrew Selle (Walt Disney Animation Studios)
+    \item \textbf{Affiliations}: University of California, Los Angeles; University of California, Riverside; Walt Disney Animation Studios
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This paper provides a comprehensive overview of the Material Point Method (MPM), a hybrid Eulerian/Lagrangian approach for simulating continuum materials in computer graphics. It covers the theoretical foundations of MPM, including its strengths and limitations, and discusses its applications in simulating various materials such as snow, lava, sand, and viscoelastic fluids. The paper also highlights the use of MPM in production environments, particularly at Walt Disney Animation Studios.
+
+\section{Outline of Major Topics}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Introduction}: Introduces the concept of MPM and its advantages over traditional Lagrangian and Eulerian methods, such as handling large deformations, mesh distortion, fracture, self-collision, and multi-material coupling.
+    \item \textbf{Kinematics Theory}: Provides a background on continuum mechanics concepts relevant to MPM, including continuum motion, deformation gradient, strain, stress, and hyperelasticity.
+    \item \textbf{Governing Equations}: Discusses the governing equations for conservation of mass and momentum, both in Lagrangian and Eulerian views, and derives the weak form of the force balance equation.
+    \item \textbf{Material Particles}: Describes the role of material particles in MPM, their interaction with the Eulerian grid, and the interpolation functions used for transferring information between particles and grid nodes.
+    \item \textbf{Discretization}: Details the discretization of the governing equations in both time and space, including the use of APIC transfers, deformation gradient update, and force computations.
+    \item \textbf{Explicit Time Integration}: Describes the explicit time integration scheme for MPM, including steps like particle-to-grid transfer, grid velocity update, and particle advection.
+    \item \textbf{Implicit Time Integration}: Discusses the implicit time integration scheme for MPM, including force derivative computations, the backward Euler system, Newton's method, and linearized force.
+    \item \textbf{More Topics}: Covers additional topics such as collision handling with rigid and deforming objects, and the use of Lagrangian forces in MPM for precise surface tracking and coupling with mesh-based approaches.
+\end{enumerate}
+
+\section{Things I Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item The paper provides a clear and concise explanation of the MPM algorithm, making it easy to understand for readers with some background in continuum mechanics and numerical methods.
+    \item The inclusion of examples and applications of MPM in production environments, particularly at Walt Disney Animation Studios, demonstrates the practical relevance and effectiveness of the method.
+\end{enumerate}
+
+\section{What Did You Not Like About the Paper?}
+\begin{itemize}[noitemsep]
+    \item The paper could benefit from a more in-depth discussion of the limitations and challenges associated with MPM, such as the potential for numerical fracture and the difficulty in accurately simulating certain material behaviors like hyperelasticity.
+    \item Some sections could be more detailed, particularly those on implicit time integration and collision handling, which could provide more guidance for practical implementation.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item What are the most promising avenues for future research in MPM, particularly in addressing its limitations and improving its accuracy and efficiency?
+    \item How can MPM be further integrated into production workflows, and what tools and techniques can be developed to facilitate its use by artists and animators?
+\end{enumerate}
+\end{document}

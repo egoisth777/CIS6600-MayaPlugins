@@ -1,0 +1,120 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{GPU Computing}}  
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-01-30}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: GPU Computing
+    \item \textbf{Year}: 2008
+    \item \textbf{Authors}: John D. Owens, Mike Houston, David Luebke, Simon Green, John E. Stone, James C. Phillips
+    \item \textbf{Affiliations}: University of California Davis, Stanford University, NVIDIA Corporation, University of Illinois at Urbana-Champaign
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This paper provides a comprehensive overview of GPU computing, detailing several key contributions:
+\begin{itemize}[noitemsep]
+    \item The evolution of GPUs from fixed-function graphics processors to programmable, massively parallel computing devices
+    \item Analysis of the advantages of GPU computing in handling highly parallel workloads with high throughput
+    \item Detailed exploration of GPGPU (General-Purpose computing on GPUs) and its impact on scientific computing and game physics
+    \item Presentation of real-world GPU applications through case studies, including Havok FX for game physics and biophysical simulations
+\end{itemize}
+
+\section{Outline of Major Topics}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Introduction}
+    \begin{enumerate}[noitemsep]
+        \item GPUs have evolved into highly parallel computing units
+        \item Parallelism is key to performance improvements
+        \item GPU computing (GPGPU) as a viable alternative for high-performance computing
+    \end{enumerate}
+    
+    \item \textbf{GPU Architecture}
+    \begin{enumerate}[noitemsep]
+        \item Graphics pipeline overview and parallel processing capabilities
+        \item Evolution of programmability from fixed-function to modern GPUs
+        \item Comparison of GPU vs. CPU architectures and priorities
+    \end{enumerate}
+    
+    \item \textbf{GPU Programming Models}
+    \begin{enumerate}[noitemsep]
+        \item SPMD (Single Program Multiple Data) paradigm
+        \item Memory access patterns and efficiency considerations
+        \item Scatter/Gather operations capabilities
+    \end{enumerate}
+    
+    \item \textbf{Software Environments for GPGPU}
+    \begin{enumerate}[noitemsep]
+        \item Early GPU programming challenges
+        \item Modern high-level programming models (CUDA, OpenCL, etc.)
+        \item Commercial and academic solutions
+    \end{enumerate}
+    
+    \item \textbf{GPU Algorithms and Applications}
+    \begin{enumerate}[noitemsep]
+        \item Essential GPU operations (Map, Reduce, Scan, Sort)
+        \item Physics simulations and scientific computing applications
+        \item Case studies of Havok FX and biophysical simulations
+    \end{enumerate}
+\end{enumerate}
+
+\section{Two Things Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item The paper provides an insightful historical perspective on GPU evolution, clearly explaining the transition from fixed-function graphics accelerators to programmable, massively parallel processors.
+    \item The real-world success stories, particularly Havok FX and Folding@Home, demonstrate impressive speedup factors (10× to 60× over CPUs) and highlight the practical impact of GPU parallelism.
+\end{enumerate}
+
+\section{What Did You Not Like About the Paper?}
+\begin{itemize}[noitemsep]
+    \item The paper focuses heavily on compute power but does not deeply discuss memory bandwidth limitations, which can significantly affect GPU performance in certain applications.
+    \item While the paper discusses the state of GPU computing as of 2008, it does not provide clear predictions for future evolution of GPUs, particularly missing the emergence of AI acceleration as a major GPU application.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item How can GPUs handle problems with significant inter-thread communication more effectively, particularly for tasks like graph algorithms and adaptive mesh refinement?
+    \item The original goal of GPU is not intended for General Parallel processing, as the importance of Generative AI is growing, will the current GPU design be specialized for those general purpose inference tasks? Will Seperate Units be designed that can provide local environment for tedious inference tasks?
+\end{enumerate}
+\end{document}

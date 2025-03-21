@@ -1,0 +1,186 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Evolving Virtual Creatures}}
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Karl Sims}
+\date{2024-01-30}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Evolving Virtual Creatures
+    \item \textbf{Published in}: Computer Graphics, Annual Conference Series (SIGGRAPH '94 Proceedings), July 1994, pp.15-22.
+    \item \textbf{Author}: Karl Sims
+    \item \textbf{Affiliation}: Thinking Machines Corporation
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This paper presents a novel system for evolving virtual creatures that move and behave in simulated 3D physical worlds. The key contributions include:
+\begin{itemize}[noitemsep]
+    \item The automatic generation of both morphology and control systems of virtual creatures using genetic algorithms.
+    \item A directed graph-based genetic representation for encoding creature structures and neural networks.
+    \item The co-evolution of morphology and control, allowing creatures to adapt their body structure and nervous system together.
+    \item Demonstration of emergent locomotion behaviors such as swimming, walking, jumping, and light-following, without manually designing these behaviors.
+    \item Application of evolutionary algorithms in procedural animation and artificial intelligence.
+\end{itemize}
+
+\section{Outline of Major Topics and Techniques}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Introduction}
+    \begin{itemize}[noitemsep]
+        \item Trade-off between complexity and control:
+        \begin{itemize}[noitemsep]
+            \item Directly animating virtual entities allows precise control but is tedious.
+            \item Dynamic simulation makes motions look natural but is difficult to control.
+        \end{itemize}
+        \item Optimization techniques, especially genetic algorithms, allow automated complexity generation.
+        \item Prior work focused on evolving control systems for fixed structures, whereas this work evolves both morphology and control simultaneously.
+    \end{itemize}
+    \item \textbf{Creature Morphology Representation}
+    \begin{itemize}[noitemsep]
+        \item Creatures are represented as hierarchical articulated 3D structures.
+        \item Morphology is encoded using a directed graph where:
+        \begin{itemize}[noitemsep]
+            \item Nodes represent body parts.
+            \item Connections represent joints and attachment relationships.
+        \end{itemize}
+        \item The graph allows recursion, enabling fractal-like repeated structures.
+    \end{itemize}
+    \item \textbf{Creature Control – Neural Network Representation}
+    \begin{itemize}[noitemsep]
+        \item A virtual brain is evolved alongside morphology.
+        \item The control system consists of:
+        \begin{itemize}[noitemsep]
+            \item Sensors (joint angles, contact sensors, photosensors).
+            \item Neurons (processing units performing mathematical operations).
+            \item Effectors (muscle forces applied to joints).
+        \end{itemize}
+        \item The neural network functions more like a dataflow system rather than a typical biological neural network.
+        \item Oscillatory neurons allow rhythmic motion patterns, crucial for locomotion.
+    \end{itemize}
+    \item \textbf{Physical Simulation}
+    \begin{itemize}[noitemsep]
+        \item Rigid-body dynamics with articulated parts.
+        \item Collision detection and response: Uses bounding box hierarchies to optimize performance.
+        \item Friction, elasticity, and fluid resistance: Creatures can move on land or water with different physics settings.
+        \item Energy conservation is enforced to prevent exploits in the physics engine.
+    \end{itemize}
+    \item \textbf{Evolution and Behavior Selection}
+    \begin{itemize}[noitemsep]
+        \item Fitness evaluation guides evolution towards desired behaviors.
+        \item Different fitness criteria lead to different behaviors:
+        \begin{itemize}[noitemsep]
+            \item Swimming: Distance traveled in a simulated water environment.
+            \item Walking: Horizontal distance covered on land.
+            \item Jumping: Maximum height reached.
+            \item Light-following: Ability to track a moving light source.
+        \end{itemize}
+        \item Elimination of unfit creatures: Creatures with collisions, excessive parts, or unrealistic structures are discarded.
+    \end{itemize}
+    \item \textbf{Evolutionary Process}
+    \begin{itemize}[noitemsep]
+        \item Population-based approach: Each generation consists of 300 creatures, with the top 20\% surviving.
+        \item Genetic operations:
+        \begin{itemize}[noitemsep]
+            \item Mutation: Randomly alters parameters, connections, or structure.
+            \item Crossover: Combines parts from two parents.
+            \item Grafting: Connects a node from one creature to another.
+        \end{itemize}
+        \item Parallel implementation: Runs on a Connection Machine CM-5, with each processor testing different individuals.
+    \end{itemize}
+    \item \textbf{Results}
+    \begin{itemize}[noitemsep]
+        \item Evolved creatures exhibit diverse locomotion strategies:
+        \begin{itemize}[noitemsep]
+            \item Swimming creatures: Snake-like undulations, tail wagging, flipper motions.
+            \item Walking creatures: Bipedal or multi-legged locomotion, hopping behaviors.
+            \item Jumping creatures: Spring-like appendages for high jumps.
+            \item Light-following creatures: Steering mechanisms to track light sources.
+        \end{itemize}
+        \item Unexpected emergent behaviors: Some creatures evolved rocking movements or oscillations to move forward efficiently.
+    \end{itemize}
+    \item \textbf{Future Work}
+    \begin{itemize}[noitemsep]
+        \item More complex tasks: Evolve creatures to perform multiple behaviors.
+        \item Competitive evolution: Introduce population-based selection pressures.
+        \item Real-world robotics: Constrain morphologies to buildable robotic designs.
+        \item Aesthetic selection: Allow users to guide evolution based on appearance.
+    \end{itemize}
+    \item \textbf{Conclusion}
+    \begin{itemize}[noitemsep]
+        \item Demonstrates that morphology and control can co-evolve.
+        \item Provides a practical approach for generating autonomous virtual creatures.
+        \item Suggests that evolutionary methods could play a role in developing intelligent behavior in virtual entities.
+    \end{itemize}
+\end{enumerate}
+
+\section{Two Things I Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Emergent Behaviors Without Manual Design}
+    \begin{itemize}[noitemsep]
+        \item The creatures developed naturalistic locomotion strategies without explicit programming. I especially adore the idea of applying the concept of evolution and fitness into artificial life generation, this combines the beauty of genetic algorithm with the complexity of natural selection.
+    \end{itemize}
+    \item \textbf{Directed Graph Representation for Morphology \& Neural Networks}
+    \begin{itemize}[noitemsep]
+        \item Using graph structures for both body morphology and neural control enables scalable and modular designs. Also, the approach allows recursive self-similarity, leading to biologically plausible body structures.
+    \end{itemize}
+\end{enumerate}
+
+\section{What Did You Not Like About the Paper?}
+\begin{itemize}[noitemsep]
+    \item \textbf{Limited Complexity in Behaviors}
+    \begin{itemize}[noitemsep]
+        \item While locomotion was well-evolved, there were no high-level behaviors like predator-prey interactions or adaptive learning. I think this can be a great extension to the current work.
+    \end{itemize}
+    \item \textbf{Lack of Robustness in Neural Control}
+    \begin{itemize}[noitemsep]
+        \item The neural system is not biologically realistic and is more like a data-processing system.Rather, it is unclear if the evolved behaviors generalize well beyond specific tasks.
+    \end{itemize}
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item How could this system evolve creatures with more complex and adaptive behaviors?
+    \item Could reinforcement learning be combined with genetic evolution to improve decision-making? This could be helpful in providing more biological-plausible lookings of the creatures that we might not be able to generate with current approach.
+\end{enumerate}
+
+\end{document}

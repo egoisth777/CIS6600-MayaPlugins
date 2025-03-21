@@ -1,0 +1,89 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Interactive Character Animation Using Simulated Physics - A State-of-the-Art Review}}
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-15}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Interactive Character Animation Using Simulated Physics - A State-of-the-Art Review
+    \item \textbf{Authors}: T. Geijtenbeek, N. Pronost
+    \item \textbf{Affiliations}:
+    \begin{itemize}[noitemsep]
+        \item T. Geijtenbeek: Department of Information and Computing Sciences, Utrecht University, The Netherlands
+        \item N. Pronost: Department of Information and Computing Sciences, Utrecht University, The Netherlands
+    \end{itemize}
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This paper presents a comprehensive review of research on physics-based character animation, spanning over two decades. It discusses the fundamental components, different control strategies, and open research areas in the field. The review also highlights recent progress in robustness, visual quality, and usability of physics-based character animation techniques.
+
+\section{Outline of Major Topics}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Introduction}: The paper introduces the concept of physics-based character animation and compares it with traditional kinematics-based approaches. It discusses the challenges and limitations of physics-based methods, such as controllability, visual quality, and implementability.
+    \item \textbf{Fundamentals}: This section provides background on the core components of physics-based character animation, including real-time physics simulation, physics-based character modeling, and motion control.
+    \item \textbf{Joint-Space Motion Control}: This section discusses joint-space motion control, a widely used approach that relies on local feedback controllers to track kinematic targets. It covers techniques like PD control, balance and pose control, and feedforward control.
+    \item \textbf{Stimulus-Response Network Control}: This section explores stimulus-response network control, an approach inspired by biological systems that uses a control network to connect sensor data to actuator data. It discusses different network types, fitness function design, and optimization strategies.
+    \item \textbf{Constrained Dynamics Optimization Control}: This section covers constrained dynamics optimization control, an approach that leverages the equations of motion to find optimal actuator values. It discusses constraints, objectives, and different control strategies like immediate optimization, pre-optimized prediction models, and model predictive control.
+    \item \textbf{Summary and Future Directions}: The paper concludes by summarizing the different approaches and techniques discussed and pointing out potential areas for future research, such as improving robustness, visual quality, and efficiency of physics-based character animation methods.
+\end{enumerate}
+
+\section{Things I Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item The paper provides a clear and well-structured overview of the evolution of research in physics-based character animation, making it a valuable resource for researchers and practitioners in the field.
+    \item The discussion of different control strategies, their strengths, and limitations offers a comprehensive understanding of the challenges and opportunities in physics-based character animation.
+\end{enumerate}
+
+\section{What Did You Not Like About the Paper?}
+\begin{itemize}[noitemsep]
+    \item The paper could benefit from a more in-depth discussion of the practical aspects of implementing and applying the various techniques discussed.
+    \item Some sections could be more detailed, particularly those on stimulus-response network control and constrained dynamics optimization control, which could provide more guidance for practical implementation.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item What are the most promising avenues for future research in physics-based character animation, particularly in addressing the challenges of controllability, visual quality, and real-time performance?
+    \item How can the different control strategies discussed in the paper be effectively combined to create more robust, expressive, and efficient physics-based character animation systems?
+\end{enumerate}
+\end{document}

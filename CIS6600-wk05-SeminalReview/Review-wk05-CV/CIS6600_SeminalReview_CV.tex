@@ -1,0 +1,122 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Pyramid Methods in Image Processing}}
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-15}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Pyramid Methods in Image Processing
+    \item \textbf{Authors}: Edward H. Adelson, Charles H. Anderson, James R. Bergen, Peter J. Burt, Joan M. Ogden
+    \item \textbf{Affiliations}:
+    \begin{itemize}[noitemsep]
+        \item RCA Laboratories, Advanced Image Processing Research Group, David Sarnoff Research Center, Princeton, New Jersey
+    \end{itemize}
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+The key contribution lies in introducing and demonstrating the image pyramid as an efficient, multiresolution data structure for image processing tasks. This framework—encompassing both Gaussian and Laplacian pyramids—enables rapid analysis of images at different scales, supports effective data compression, and simplifies a wide range of image manipulation operations.
+
+\section{Major Topics \& Techniques}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Motivation for Multiresolution Approaches}:
+    \begin{itemize}[noitemsep]
+        \item The authors point out that real-world images have details spanning multiple scales (from coarse outlines to fine textures). A single-scale approach may miss important details at other scales, so the paper highlights why multiple resolutions are crucial.
+    \end{itemize}
+    \item \textbf{Gaussian and Laplacian Pyramids}:
+    \begin{itemize}[noitemsep]
+        \item \textbf{Gaussian Pyramid}: Iteratively lowpass filters and downsamples the image, capturing progressively coarser representations.
+        \item \textbf{Laplacian Pyramid}: Obtained by subtracting an expanded (upsampled) Gaussian level from its previous level, thus yielding bandpass information at each scale.
+        \item Both pyramids allow efficient computations, enabling scaled convolution and reduced storage requirements for specific tasks.
+    \end{itemize}
+    \item \textbf{Data Compression}:
+    \begin{itemize}[noitemsep]
+        \item Because the bandpass levels of the Laplacian pyramid often contain values clustered near zero, they can be quantized aggressively without large perceptual errors. This leads to high compression ratios while preserving important image details.
+    \end{itemize}
+    \item \textbf{Image Analysis Applications}:
+    \begin{itemize}[noitemsep]
+        \item \textbf{Pattern Matching}: Searching for targets across different sizes becomes much faster with pyramid representations.
+        \item \textbf{Texture and Boundary Detection}: By convolving pyramid levels with suitable filters, then integrating results at multiple scales, one can detect subtle boundaries (e.g., between different wood grains).
+        \item \textbf{Fast Coarse-to-Fine Searches}: Quickly narrows the region of interest at a coarse scale before refining results at higher resolutions.
+    \end{itemize}
+    \item \textbf{Image Enhancement}:
+    \begin{itemize}[noitemsep]
+        \item \textbf{Multiresolution Coring}: Suppresses noise while preserving important edges by removing small values in each pyramid level and then reconstructing.
+        \item \textbf{Focus and Mosaics}:
+        \begin{itemize}[noitemsep]
+            \item \textbf{Multifocus Image Fusion}: Combines images focused at different depths by selectively choosing the sharpest pyramid coefficients from each input.
+            \item \textbf{Multiresolution Splining for Mosaics}: Seamlessly stitches images in each spatial frequency band, avoiding visible "seams."
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\section{Two Things I Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Elegant Handling of Multiple Scales}:
+    \begin{itemize}[noitemsep]
+        \item The paper provides a clear, intuitive justification for why multiscale analysis is needed and how the pyramids mirror human visual processing. It's both conceptually clean and computationally efficient.
+    \end{itemize}
+    \item \textbf{Wide-Ranging Practical Applications}:
+    \begin{itemize}[noitemsep]
+        \item From data compression to complex tasks like creating multifocus images and seamlessly blending photo mosaics, the pyramid approach proves remarkably versatile, illustrating its broad applicability in image processing.
+    \end{itemize}
+\end{enumerate}
+
+\section{What I Did Not Like About the Paper}
+\begin{itemize}[noitemsep]
+    \item While the paper was groundbreaking for its time, its discussion occasionally assumes familiarity with certain filtering and sampling techniques, which might be challenging to newer readers. There could have been more step-by-step examples or diagrams elaborating how to pick filter kernels or manage boundary artifacts during the REDUCE and EXPAND processes. A more extensive error analysis (beyond compression artifacts) might also help readers appreciate the approach's limitations or potential numerical issues in larger-scale implementations.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Adaptive Filter Choices}:
+    \begin{itemize}[noitemsep]
+        \item Have you explored adapting the generating kernel based on the local image content (e.g., edges vs. smooth regions)? If so, how would that affect pyramid construction speed and overall performance?
+    \end{itemize}
+    \item \textbf{Robustness to Artifacts}:
+    \begin{itemize}[noitemsep]
+        \item In applications like mosaic blending, do you see issues with noticeable "ghosting" or blur when adjacent images have mismatched illumination or perspective distortion? How might one modify the pyramid approach (e.g., local brightness matching, additional geometric corrections) to reduce such artifacts?
+    \end{itemize}
+\end{enumerate}
+\end{document}

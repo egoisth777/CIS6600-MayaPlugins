@@ -1,0 +1,123 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Level Set Methods: An Overview and Some Recent Results}}
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-15}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Level Set Methods: An Overview and Some Recent Results
+    \item \textbf{Authors}: Stanley Osher, Ronald P. Fedkiw
+    \item \textbf{Affiliations}:
+    \begin{itemize}[noitemsep]
+        \item Stanley Osher: Department of Mathematics, University of California Los Angeles
+        \item Ronald P. Fedkiw: Computer Science Department, Stanford University
+    \end{itemize}
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This paper presents a comprehensive overview of level set methods, a powerful numerical technique for tracking moving interfaces and shapes in multiple dimensions. The authors consolidate various developments in level set methodology, including recent variants and extensions, while highlighting its broad applications across different fields. The work serves as both an introductory guide and a detailed reference, covering everything from basic theory to advanced applications in physics simulation and computer vision.
+
+\section{Major Topics \& Techniques}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Fundamental Concepts}:
+    \begin{itemize}[noitemsep]
+        \item Introduction to the level set method and its basic equation
+        \item Numerical schemes for solving level set equations
+        \item Essential terminology and mathematical framework
+    \end{itemize}
+    \item \textbf{Key Components \& Extensions}:
+    \begin{enumerate}[label=\alph*), noitemsep]
+        \item \textbf{Recent Variants}: Motion of curves in 3D, Dynamic Surface Extension method
+        \item \textbf{Fast Methods}: Techniques for steady-state problems and efficient computation
+        \item \textbf{Level Set Dictionary}: Comprehensive collection of key terms and implementation details
+        \item \textbf{Coupling with Physics}: Integration with external physical phenomena
+    \end{enumerate}
+    \item \textbf{Applications}:
+    \begin{itemize}[noitemsep]
+        \item \textbf{Physical Simulations}: Compressible and incompressible flows, crystal growth
+        \item \textbf{Computer Vision}: Image segmentation, restoration, and shape reconstruction
+        \item \textbf{Multiphase Systems}: Handling multiple interfaces and materials
+    \end{itemize}
+    \item \textbf{Implementation Aspects}:
+    \begin{itemize}[noitemsep]
+        \item Numerical schemes and discretization methods
+        \item Stability considerations and boundary conditions
+        \item Optimization techniques for performance
+    \end{itemize}
+\end{enumerate}
+
+\section{Two Things I Liked}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Comprehensive Yet Accessible Presentation}:
+    \begin{itemize}[noitemsep]
+        \item The paper successfully bridges theoretical foundations with practical applications
+        \item Clear progression from basic concepts to advanced topics makes it valuable for various reader levels
+    \end{itemize}
+    \item \textbf{Versatility of Applications}:
+    \begin{itemize}[noitemsep]
+        \item Demonstrates the method's broad applicability across different domains
+        \item Provides concrete examples of level set methods solving real-world problems
+    \end{itemize}
+\end{enumerate}
+
+\section{One Thing I Did Not Like}
+\begin{itemize}[noitemsep]
+    \item The paper could benefit from more visual illustrations and practical examples to help readers better understand the abstract concepts. While the mathematical formulation is thorough, additional diagrams showing the evolution of level sets in different scenarios would make the content more accessible to newcomers in the field.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item How do level set methods perform in scenarios with complex topological changes?
+    \begin{itemize}[noitemsep]
+        \item What are the computational challenges in handling multiple simultaneous splitting and merging events?
+        \item Are there specific optimizations or techniques for maintaining accuracy during such transitions?
+    \end{itemize}
+    \item What are the current limitations in coupling level set methods with physical simulations?
+    \begin{itemize}[noitemsep]
+        \item How do you handle stability issues when dealing with complex boundary conditions?
+        \item What approaches do you recommend for balancing computational efficiency with accuracy in real-world applications?
+    \end{itemize}
+\end{enumerate}
+\end{document}

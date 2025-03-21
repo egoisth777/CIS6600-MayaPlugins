@@ -1,0 +1,124 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Position Based Dynamics}}  
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-15}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Position Based Dynamics
+    \item \textbf{Authors}: Matthias Müller, Bruno Heidelberger, Marcus Hennix, John Ratcliff
+    \item \textbf{Affiliations}: AGEIA
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This paper introduces Position Based Dynamics (PBD) as an alternative to traditional force-based simulation methods in computer graphics. Unlike conventional techniques that rely on Newton's second law to compute forces, accelerations, and velocities before updating positions, PBD operates directly on positions, making it more stable, controllable, and well-suited for real-time applications like games and interactive simulations. The method allows for efficient handling of constraints, preventing issues such as overshooting in explicit integration schemes and ensuring robust collision handling.
+
+\section{Outline of Major Topics}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Motivation \& Background}
+    \begin{enumerate}[noitemsep]
+        \item Traditional physics-based simulation methods compute accelerations from forces and then update velocities and positions.
+        \item PBD skips the velocity layer and works directly with positions, simplifying constraint handling and improving numerical stability.
+        \item Ideal for real-time applications where stability and control are more important than strict physical accuracy.
+    \end{enumerate}
+    
+    \item \textbf{Position-Based Simulation Framework}
+    \begin{enumerate}[noitemsep]
+        \item Objects are represented using vertices with masses and positions.
+        \item Constraints are enforced iteratively by directly adjusting positions rather than computing forces.
+        \item A Gauss-Seidel-type solver is employed to ensure constraints are satisfied.
+    \end{enumerate}
+    
+    \item \textbf{Core Algorithm}
+    \begin{enumerate}[noitemsep]
+        \item The simulation loop consists of:
+            \begin{enumerate}[noitemsep]
+                \item Predicting new positions using an explicit Euler step.
+                \item Iteratively applying constraints to adjust positions.
+                \item Updating velocities based on the adjusted positions.
+                \item Handling collisions and friction using constraint-based projections.
+            \end{enumerate}
+    \end{enumerate}
+    
+    \item \textbf{Collision Handling \& Constraint Projection}
+    \begin{enumerate}[noitemsep]
+        \item Resolving penetrations with position constraints instead of impulse-based force models.
+        \item Ensuring momentum conservation to avoid unintended translations or rotations.
+        \item Incorporating continuous collision detection to prevent tunneling.
+    \end{enumerate}
+    
+    \item \textbf{Application to Cloth Simulation}
+    \begin{enumerate}[noitemsep]
+        \item Particularly effective for cloth simulation by avoiding instability issues of force-based models.
+        \item Uses stretching and bending constraints to preserve cloth properties.
+        \item Efficiently resolves cloth self-collisions through spatial hashing.
+        \item Enables interactive cloth tearing by dynamically breaking stretching constraints.
+    \end{enumerate}
+    
+    \item \textbf{Performance \& Results}
+    \begin{enumerate}[noitemsep]
+        \item Achieves real-time performance, even for complex simulations such as cloth interacting with rigid bodies.
+        \item Provides stable handling of self-collisions in garments and soft materials.
+        \item Demonstrates high frame rates (e.g., 47 FPS for a cloth with 4264 vertices).
+    \end{enumerate}
+\end{enumerate}
+
+\section{Two Things I Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Improved Stability \& Control Compared to Force-Based Methods}: The direct manipulation of positions avoids numerical instability common in explicit integration, eliminating overshooting artifacts and resulting in more predictable and controllable simulations.
+    \item \textbf{Efficient Collision Handling \& Constraint Resolution}: The method efficiently resolves collisions and constraints without expensive force computations, enabling real-time simulation of complex interactions.
+\end{enumerate}
+
+\section{What Did You Not Like About the Paper?}
+\begin{itemize}[noitemsep]
+    \item \textbf{Limited Physical Realism Compared to Force-Based Approaches}: Although PBD offers enhanced stability and control, it sacrifices some physical accuracy. The reliance on iterative constraint solvers does not always guarantee physically correct forces, especially in highly dynamic or chaotic scenarios, limiting its suitability for high-fidelity simulations.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Handling Extreme Deformation Scenarios}: How does Position Based Dynamics handle extreme deformation scenarios, such as highly flexible materials or dynamically breaking constraints? Can the method be adapted to simulate more complex elastic deformations or fracturing materials while maintaining stability?
+    \item \textbf{Extension to Rigid Body Simulations}: Can this approach be extended to rigid body simulations while maintaining efficiency? Would additional techniques, such as angular constraints or impulse propagation, be necessary to ensure stability in such simulations?
+\end{enumerate}
+\end{document}

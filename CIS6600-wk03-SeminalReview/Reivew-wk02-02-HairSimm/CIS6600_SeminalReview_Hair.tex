@@ -1,0 +1,114 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{An Artist Friendly Hair Shading System (ACM SIGGRAPH 2010)}}  
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-07}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: An Artist Friendly Hair Shading System (ACM SIGGRAPH 2010)
+    \item \textbf{Year}: 2010
+    \item \textbf{Authors}: Iman Sadeghi (Walt Disney Animation Studios \& UC San Diego), Heather Pritchett (Walt Disney Animation Studios), Henrik Wann Jensen (University of California, San Diego), and Rasmus Tamstorf (Walt Disney Animation Studios)
+    \item \textbf{Affiliations}: Walt Disney Animation Studios, UC San Diego
+    \item \textbf{Related Website}: la.disneyresearch.com
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+The paper introduces two major contributions:
+\begin{itemize}[noitemsep]
+    \item \textbf{Art-Directable Hair Shader}: A novel hair shading model that builds on physically-based rendering while introducing intuitive, artist-friendly controls (e.g., adjustments for color, shine, and highlights) that bridge realism with artistic freedom. (References: la.disneyresearch.com, datarepo.ucsd.edu, today.ucsd.edu)
+    \item \textbf{Production Integration \& Validation}: Demonstration of the shader's practicality by its integration into Walt Disney Animation's production pipeline, as showcased in the film \textbf{Tangled}. An informal study with Disney artists confirmed the new system's ease of use compared to earlier approaches.
+\end{itemize}
+
+\section{Outline of Major Topics}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Physically-Based Hair Shading Background}
+    \begin{enumerate}[noitemsep]
+        \item Review of existing physically-based hair models (e.g., Marschner et al.) and their limitations for production.
+        \item Discussion on how technical parameters in these models are not intuitive for artists.
+    \end{enumerate}
+    
+    \item \textbf{Dual Scattering Technique}
+    \begin{enumerate}[noitemsep]
+        \item Use of the dual scattering model (based on Zinke et al. 2008) to approximate multiple light scattering in hair fibers.
+        \item Implementation in RenderMan using deep shadow maps to account for self-shadowing.
+    \end{enumerate}
+    
+    \item \textbf{Artist-Friendly Control Parameters}
+    \begin{enumerate}[noitemsep]
+        \item Introduction of high-level controls (e.g., sheen, color, highlight intensity) that map to underlying physical parameters.
+        \item Explanation of how these controls affect specular lobes and diffuse glow.
+    \end{enumerate}
+    
+    \item \textbf{Implementation \& Pipeline Integration}
+    \begin{enumerate}[noitemsep]
+        \item Integration of the shader into Disney's animation workflow, with details such as using deep-shadow data for shading.
+        \item Discussion of performance considerations and flexibility for large hair volumes.
+    \end{enumerate}
+    
+    \item \textbf{User Study and Results}
+    \begin{enumerate}[noitemsep]
+        \item Presentation of an informal user study comparing the new shader against previous methods.
+        \item Reporting of improved usability and artist satisfaction, with sample renders from *Tangled*.
+    \end{enumerate}
+\end{enumerate}
+
+\section{Two Things Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Blend of Physical Accuracy and Artistic Control}: The work combines accurate hair rendering with intuitive controls, enabling artists to adjust parameters without deep technical knowledge. (References: today.ucsd.edu, research.dreamworks.com)
+    \item \textbf{Production Relevance and Validation}: The integration of the shader into Disney's production pipeline (as seen in *Tangled*) and positive feedback from an informal user study underscore its real-world applicability. (Reference: datarepo.ucsd.edu)
+\end{enumerate}
+
+\section{What Did You Not Like About the Paper?}
+\begin{itemize}[noitemsep]
+    \item \textbf{Limited Formal Evaluation}: The shader's usability is only backed by an informal user study lacking detailed methodology and quantitative analysis.
+    \item \textbf{Potential Parameter Tuning Complexity}: Despite its intuitive design, the introduction of new control parameters may still impose a learning curve for artists—especially in accommodating edge cases.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Generality to Other Hair/Fur Types}: How well would the proposed hair shading system generalize to hair and fur beyond the examples tested (for instance, very curly hair, animal fur, or other physically distinct hair types)? Were there limitations observed when handling different geometries or colors?
+    \item \textbf{Physical Accuracy vs. Artistic Tweaks}: Given the shader's foundation on physical principles (e.g., dual scattering, Marschner's model approximation), do the authors find that artistic adjustments can lead to non-physical results? How is energy conservation or realism ensured despite the intuitive control settings?
+\end{enumerate}
+\end{document}

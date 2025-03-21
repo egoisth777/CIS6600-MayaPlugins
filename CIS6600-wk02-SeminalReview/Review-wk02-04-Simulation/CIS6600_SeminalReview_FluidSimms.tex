@@ -1,0 +1,141 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Real-Time Fluid Dynamics for Games}}
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Jos Stam}
+\date{2024-01-30}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Real-Time Fluid Dynamics for Games
+    \item \textbf{Published in}: GDC 2003
+    \item \textbf{Author}: Jos Stam
+    \item \textbf{Affiliation}: Alias | Wavefront (formerly at SGI)
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+This paper introduces a fluid simulation algorithm specifically designed for real-time applications in games. Its key strengths include:
+\begin{itemize}[noitemsep]
+    \item Stability and efficiency that enable realistic fluid effects on standard PC hardware.
+    \item A novel approach that avoids numerical instabilities even when using larger time steps.
+    \item A straightforward and concise C implementation.
+    \item Practical applicability demonstrated by its adoption in MAYA Fluid Effects™.
+\end{itemize}
+
+\section{Outline of Major Topics and Techniques}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Introduction}
+    \begin{itemize}[noitemsep]
+        \item Highlights the limitations of traditional particle systems and ad-hoc methods for realistic fluid simulation in games.
+        \item Emphasizes the challenges of real-time computation with the Navier-Stokes equations.
+    \end{itemize}
+    \item \textbf{Physics of Fluids}
+    \begin{itemize}[noitemsep]
+        \item Provides a concise overview of fluid dynamics principles.
+        \item Focuses on the Navier-Stokes equations and fundamental behaviors: advection, diffusion, and the influence of external forces.
+    \end{itemize}
+    \item \textbf{Discretization on a Grid}
+    \begin{itemize}[noitemsep]
+        \item Utilizes a discrete grid to represent the fluid, with properties stored at cell centers.
+        \item Discusses the trade-off between grid resolution and computational cost, as well as the importance of boundary conditions.
+    \end{itemize}
+    \item \textbf{Stable Fluid Solver}
+    \begin{itemize}[noitemsep]
+        \item Details the three main steps of the solver:
+        \begin{itemize}[noitemsep]
+            \item \textbf{Density Transport (Advection)}: Employs semi-Lagrangian advection for stable movement of fluid density.
+            \item \textbf{Velocity Update}: Incorporates diffusion and self-advection using iterative solvers (e.g., Gauss-Seidel relaxation).
+            \item \textbf{Mass Conservation}: A projection step to enforce fluid incompressibility.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Implementation}
+    \begin{itemize}[noitemsep]
+        \item Describes a concise and efficient C implementation.
+        \item Outlines key functions such as add\_source, diffuse, advect, and project.
+        \item Highlights performance optimizations and the ability to use larger time steps.
+    \end{itemize}
+    \item \textbf{Extensions and Applications}
+    \begin{itemize}[noitemsep]
+        \item Explores potential extensions to interactive smoke, fire, and water simulations.
+        \item Discusses possible adaptations for various hardware platforms.
+    \end{itemize}
+    \item \textbf{Real-World Applications}
+    \begin{itemize}[noitemsep]
+        \item Showcases the algorithm's impact through its use in MAYA Fluid Effects™ and real-time game engines.
+        \item Provides performance benchmarks on standard PCs.
+    \end{itemize}
+\end{enumerate}
+
+\section{Two Things I Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Stability and Efficiency}
+    \begin{itemize}[noitemsep]
+        \item The algorithm's ability to remain stable with larger time steps is essential for real-time applications.
+        \item The use of semi-Lagrangian advection and iterative solvers effectively prevents numerical instabilities.
+    \end{itemize}
+    \item \textbf{Minimalist Implementation}
+    \begin{itemize}[noitemsep]
+        \item The concise C implementation demonstrates the algorithm's elegance and ease of understanding.
+        \item Its simplicity has contributed to its widespread adoption in various applications, such as MAYA Fluid Effects™.
+    \end{itemize}
+\end{enumerate}
+
+\section{What Did You Not Like About the Paper?}
+\begin{itemize}[noitemsep]
+    \item \textbf{Limited Discussion of Accuracy}
+    \begin{itemize}[noitemsep]
+        \item While the paper emphasizes visual realism, it lacks a rigorous comparison to physically accurate fluid simulations or established CFD benchmarks.
+        \item The impact of numerical dissipation on realism is not thoroughly addressed.
+    \end{itemize}
+    \item \textbf{No GPU Consideration}
+    \begin{itemize}[noitemsep]
+        \item The paper predates the widespread use of GPUs for general-purpose computation.
+        \item A discussion of GPU acceleration and parallel processing would have been a valuable addition.
+    \end{itemize}
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item Could this method be effectively adapted for large-scale simulations, such as ocean currents, considering the computational demands and potential for accumulated error?
+    \item How does this approach compare to modern deep-learning-based fluid simulation techniques, particularly in terms of accuracy, computational cost, and ease of implementation?
+\end{enumerate}
+\end{document}

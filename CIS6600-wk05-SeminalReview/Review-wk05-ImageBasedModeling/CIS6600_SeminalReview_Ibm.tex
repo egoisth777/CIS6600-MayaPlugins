@@ -1,0 +1,118 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ulem}
+\usepackage{fancyhdr}
+
+
+\newcommand{\school}{
+     \textbf{University of Pennsylvania}
+}
+
+\newcommand{\courseno}{
+     \textbf{CIS 6600}
+}
+
+\newcommand{\paperTitle}{
+    \textit{\normalsize{Modeling and Rendering Architecture from Photographs: A Hybrid Geometry- and Image-Based Approach}}
+}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{1em}{}
+
+% Setup fancy headers
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[R]{\school{} \\ \courseno{}}
+\renewcommand{\headrulewidth}{0.4pt} % add header rule
+
+\fancypagestyle{plain}{
+    \fancyhf{} % clear all header and footer fields
+    \fancyhead[R]{\school{} \\ \courseno{}} % set the right header
+    \renewcommand{\headrulewidth}{0.4pt} % add header rule
+}
+
+% Begin Document
+\begin{document}
+
+\title{\Large\uline{\textbf{Paper Review}} \\[0.4em]
+\paperTitle{} 
+}
+\author{Yueyang Li}
+\date{2024-02-15}
+
+\maketitle
+
+\section{Paper Title, Authors, and Affiliations}
+\begin{itemize}[noitemsep]
+    \item \textbf{Title}: Modeling and Rendering Architecture from Photographs: A Hybrid Geometry- and Image-Based Approach
+    \item \textbf{Authors}: Paul E. Debevec, Camillo J. Taylor, Jitendra Malik
+    \item \textbf{Affiliations}:
+    \begin{itemize}[noitemsep]
+        \item Computer Science Division, University of California, Berkeley
+    \end{itemize}
+\end{itemize}
+
+\section{Main Contribution of the Paper}
+The paper introduces a hybrid approach that combines classical geometry-based modeling with image-based rendering to generate realistic 3D models of large-scale architectural scenes from a small set of photographs. The authors propose 
+\begin{itemize}[noitemsep]
+    \item (1) a photogrammetric modeling system to recover basic 3D geometry from sparse user-defined correspondences on images, and 
+    \item (2) a model-based stereo method to refine this geometry further by capturing fine details. 
+\end{itemize}
+The final rendering step, called view-dependent texture mapping, composites photographs based on the viewer's perspective, leading to more photorealistic results compared to traditional texture mapping.
+
+\section{Major Topics \& Techniques}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Photogrammetric Modeling}:
+    \begin{itemize}[noitemsep]
+        \item The authors describe an interactive method that leverages user-input constraints (edges or lines marked in the images) and known camera calibration to produce an approximate geometric model of an architectural scene (e.g., using primitives like boxes, wedges, prisms).
+        \item This process differs from purely automated structure-from-motion systems by embedding simple architectural constraints (orthogonality, parallel lines, etc.) and letting the user place partial correspondences only where needed.
+    \end{itemize}
+    \item \textbf{View-Dependent Texture Mapping}:
+    \begin{itemize}[noitemsep]
+        \item Instead of a single static texture map per surface, they propose a smooth blending of multiple photographs based on each camera's viewing direction.
+        \item This technique yields rendered images that preserve realistic appearance for materials and fine details that a coarse 3D model might miss otherwise (e.g., windows, ornaments, specular effects).
+    \end{itemize}
+    \item \textbf{Model-Based Stereo}:
+    \begin{itemize}[noitemsep]
+        \item Once a coarse geometric model is in place, "warping" a second image onto this geometry (and viewing from the first image's position) drastically reduces foreshortening differences and occlusion complexity.
+        \item This allows more robust stereo correspondence even with wide camera baselines, overcoming many limitations of traditional dense stereo, and recovering more precise depth maps for unmodeled details.
+    \end{itemize}
+    \item \textbf{Rendering \& Applications}:
+    \begin{itemize}[noitemsep]
+        \item Final viewpoints can be arbitrarily chosen and rendered by compositing the original images via the partial depth or refined geometry.
+        \item The paper demonstrates realistic new views of complex buildings (e.g., facades, towers) with fewer required photographs than prior purely image-based methods (which might require dense camera sampling).
+    \end{itemize}
+\end{enumerate}
+
+\section{Two Things I Liked or Found Interesting}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Robustness via Hybrid Approach}:
+    \begin{itemize}[noitemsep]
+        \item The paper's method neatly resolves pitfalls of purely geometry-based or purely image-based techniques. Modeling large, intricate structures is simplified by embedding high-level architectural constraints, and stereo matching is made more reliable by projecting onto a known approximate model.
+    \end{itemize}
+    \item \textbf{View-Dependent Texture Mapping}:
+    \begin{itemize}[noitemsep]
+        \item By blending and weighting different image projections according to viewing angle, the system avoids visible seams and better simulates unmodeled 3D details or changing surface specularities—resulting in impressively realistic outputs.
+    \end{itemize}
+\end{enumerate}
+
+\section{What I Did Not Like About the Paper}
+\begin{itemize}[noitemsep]
+    \item Although the approach is powerful, it still relies on significant user interaction to create the initial model constraints and mark edges in the images. While the authors argue this user input is modest (compared to fully manual 3D reconstruction), it can still be labor-intensive for very large or richly detailed scenes. The paper's approach to handling highly curved or organic architectural elements (e.g., decorative sculpting) also remains somewhat manual or limited, relying on the subsequent stereo step to refine geometry.
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}[noitemsep]
+    \item \textbf{Scalability \& Automation}:
+    \begin{itemize}[noitemsep]
+        \item Have you investigated ways to reduce user input further—e.g., automated feature extraction for lines and edges or automatic detection of common architecture "primitives"? Could machine-learning-based approaches assist in automatically suggesting or verifying constraints?
+    \end{itemize}
+    \item \textbf{Complex Photometric Conditions}:
+    \begin{itemize}[noitemsep]
+        \item The paper focuses on images taken under consistent lighting. How would you handle scenarios where lighting across photographs differs drastically (e.g., images taken at different times of day or in changing weather)? Could your techniques be integrated with radiometric calibration or reflectance modeling to produce consistent results under varied illumination?
+    \end{itemize}
+\end{enumerate}
+\end{document}

@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Paper Review: Target-Driven Smoke Animation}
+\author{Raanan Fattal, Dani Lischinski \\ School of Computer Science and Engineering, The Hebrew University of Jerusalem}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Main Contribution}
+This paper introduces a novel approach for controlling animated smoke by guiding it toward a sequence of user-specified target states. Unlike previous methods that rely on computationally expensive optimization, this method introduces two new terms in the standard flow equations:
+\begin{itemize}
+    \item \textbf{Driving Force Term:} Steers the fluid to carry the smoke toward a target.
+    \item \textbf{Smoke Gathering Term:} Prevents excessive diffusion and improves the ability to match arbitrary targets.
+\end{itemize}
+These modifications enable efficient, visually compelling smoke animations at a cost close to that of a regular smoke simulation, making it a practical alternative for applications in computer graphics and animation.
+
+\section{Major Topics \& Techniques}
+\subsection{Motivation \& Background}
+\begin{itemize}
+    \item Realistic smoke animations rely on fluid dynamics simulations, but precise control over smoke motion remains a challenge.
+    \item Previous methods (e.g., Treuille et al. (2003)) used keyframe control via optimization, which is computationally expensive.
+    \item This paper proposes an alternative ``target-driven'' approach that eliminates expensive optimization by modifying the standard smoke simulation equations.
+\end{itemize}
+
+\subsection{Mathematical Formulation \& New Terms}
+\begin{itemize}
+    \item The standard Euler equations for fluid flow are modified to include:
+    \begin{itemize}
+        \item \textbf{Driving Force Term} $F(\rho,\rho^*)$, which moves the smoke towards the target.
+        \item \textbf{Gathering Term} $G(\rho,\rho^*)$, which counteracts numerical diffusion.
+    \end{itemize}
+    \item The driving force is computed based on the target’s density gradient, ensuring the smoke moves naturally toward it.
+    \item The gathering term acts like an inverse diffusion process to keep the smoke from dispersing too much.
+\end{itemize}
+
+\subsection{Implementation \& Numerical Methods}
+\begin{itemize}
+    \item Uses operator splitting to solve the fluid equations efficiently.
+    \item Employs finite difference methods on a staggered grid to maintain numerical stability.
+    \item Advection and gathering terms are handled using a high-resolution hyperbolic solver.
+    \item Multigrid methods are used to solve the Poisson equation for pressure projection.
+\end{itemize}
+
+\subsection{Results \& Applications}
+\begin{itemize}
+    \item Produces visually impressive smoke animations, such as:
+    \begin{itemize}
+        \item A smoke galleon sailing through a smoke ring (a famous example from \emph{The Lord of the Rings}).
+        \item Morphing logos and shapes (e.g., a Stanford bunny forming from two smoke sources).
+        \item Character-driven smoke animations (e.g., a walking tiger made of smoke).
+    \end{itemize}
+    \item Simulations achieve speeds up to two orders of magnitude faster than keyframe-based optimization approaches.
+\end{itemize}
+
+\section{Highlights}
+\subsection{Two Things I Liked}
+\begin{itemize}
+    \item \textbf{Computational Efficiency Without Sacrificing Visual Quality:}
+    \begin{itemize}
+        \item The method achieves real-time smoke control without requiring costly global optimization.
+        \item A simple closed-form driving force ensures efficient updates without complex parameter tuning.
+    \end{itemize}
+    \item \textbf{Flexibility in Smoke Animation Control:}
+    \begin{itemize}
+        \item Allows animators to define sequences of target states, providing intuitive control over the smoke’s motion.
+        \item The ability to independently control multiple interacting smoke fields is powerful for complex animations.
+    \end{itemize}
+\end{itemize}
+
+\subsection{One Thing I Did Not Like}
+\begin{itemize}
+    \item \textbf{Limited Physical Realism in Some Cases:}
+    \begin{itemize}
+        \item The gathering term is a non-physical process designed to counteract diffusion.
+        \item While it improves target matching, it sometimes makes smoke transitions appear unnatural, as if shapes were emerging from a static cloud rather than dynamically evolving.
+        \item A more kinetics-based gathering mechanism might have improved realism.
+    \end{itemize}
+\end{itemize}
+
+\section{Questions for the Authors}
+\begin{enumerate}
+    \item How does the method handle turbulent smoke motion when moving towards highly detailed targets? Does it struggle with high-frequency target density changes, and if so, how could it be improved?
+    \item Can this approach be extended to real-time interactive control? Given its efficiency, could it be adapted for applications like video games or real-time VFX, where user input directly modifies smoke targets?
+\end{enumerate}
+
+\end{document}
