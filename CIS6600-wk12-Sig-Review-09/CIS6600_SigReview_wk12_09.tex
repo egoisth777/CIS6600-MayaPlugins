@@ -1,0 +1,146 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\textbf{Paper\#1 TITLE: Stylizing Video by Example (JSTLFLSS, 2019)}
+
+\textbf{What was the main contribution of the paper?}
+
+This paper introduces a novel method for video stylization that enables temporal style transfer by using a pair of videos (a style video and an input video) to generate a stylized output video. The key innovation is their approach to maintaining temporal consistency while preserving the style, which they achieve through an optimization-based framework that combines both spatial and temporal constraints. Specifically, they introduce a guided patch-based synthesis approach that respects both style-to-input relationships and temporal coherence in a multi-scale framework. This allows for automatic propagation of style elements while maintaining coherent motion between frames.
+
+\textbf{List two things you liked or found interesting about the paper:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The bidirectional temporal constraints introduced in the paper provide an elegant solution to the challenging problem of maintaining temporal coherence in stylized videos. By accounting for motion in both forward and backward directions, the method produces visually pleasing results without the flickering artifacts common in frame-by-frame stylization approaches.
+\item
+  The paper's multi-scale patch-based optimization framework effectively balances local detail preservation with global consistency. This approach allows the method to handle a diverse range of styles and input videos, from painterly effects to complex texture transfers, while preserving the underlying motion and structure of the original content.
+\end{enumerate}
+
+\textbf{What did you not like about the paper?}
+
+The computational cost of the method appears to be quite high, requiring significant processing time even for short video clips. This limits the practical applicability of the approach for longer videos or real-time applications, which is a considerable drawback compared to faster (albeit less temporally consistent) deep learning-based style transfer methods.
+
+\textbf{What questions do you have for the author about their research?}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Have you explored ways to accelerate the optimization process through hardware optimization or algorithmic improvements to make the method more practical for longer videos or interactive applications?
+\item
+  How does your approach handle extreme changes in scene content or camera motion in the input video? Are there certain thresholds beyond which the temporal consistency constraints become less effective?
+\end{enumerate}
+
+\newpage
+\textbf{Paper\#2 TITLE: Example-Based Plastic Deformation of Rigid Bodies (JTSB, 2016)}
+
+\textbf{What was the main contribution of the paper?}
+
+This paper presents a novel method for simulating plastic deformation of rigid bodies based on examples, without requiring complex physical simulation of material properties. The authors introduce a meshless approach that uses a small set of example poses to generate plausible deformations through shape interpolation guided by a deformation field. The key innovation is their two-step deformation process that combines a coarse deformation field represented by moving least squares with local blending of example poses. This enables interactive plastic deformation that preserves both local and global characteristics of the example shapes while allowing for diverse deformation patterns that extend beyond the original examples.
+
+\textbf{List two things you liked or found interesting about the paper}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The example-based approach drastically simplifies the process of creating plausible plastic deformations compared to physics-based methods. By eliminating the need to define complex material properties and compute expensive simulations, the technique allows artists and designers to intuitively control deformations through a small set of example poses, making it particularly accessible for computer graphics applications.
+\item
+  The method's ability to handle embedded space deformation is impressive, as it allows the deformation to affect not just the surface but also internal structures and attached objects. This creates a more cohesive and realistic result for complex objects with internal components or attached elements, which is essential for applications like video games and visual effects.
+\end{enumerate}
+
+\textbf{What did you not like about the paper?}
+
+While the example-based approach offers significant advantages in terms of usability and control, it still requires manual creation of the example poses which could be time-consuming for complex objects. The paper doesn't fully address how to create a minimal yet sufficient set of examples to capture the desired range of deformation behaviors, which might limit its practical application without significant artistic input.
+
+\textbf{What questions do you have for the author about their research?}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Have you explored methods to automatically generate the example poses from a single input model, perhaps by incorporating some physical simulation principles to suggest plausible deformations that an artist could then refine?
+\item
+  How does your approach perform when applied to objects with very different material characteristics in the same scene (e.g., soft rubber alongside brittle plastic)? Can the framework be extended to handle interactions between differently deforming materials?
+\end{enumerate}
+
+\newpage
+\textbf{Paper\#3 TITLE: Blending Liquids (RWTT, 2014)}
+
+\textbf{What was the main contribution of the paper?}
+
+This paper introduces a novel approach for simulating the mixing behavior of miscible and immiscible fluids, such as water, oil, and alcohol. The key contribution is the development of a blending model for multiple fluid simulation that operates at both the particle and grid levels. At the particle level, the authors introduce a method for tracking concentration changes during fluid mixing, while at the grid level they apply volume-weighted blending of physical attributes (like density and viscosity) based on these concentrations. This dual-approach enables realistic simulation of complex fluid interactions like miscible mixing, layering of immiscible fluids, and even partial mixing phenomena, all while maintaining the performance advantages of a unified simulation framework.
+
+\textbf{List two things you liked or found interesting about the paper:}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The paper presents an elegant solution to representing different mixing behaviors through its concentration diffusion model. By controlling diffusion rates between different fluid types, the system can simulate a wide range of phenomena from completely immiscible fluids that remain separate to fully miscible fluids that blend seamlessly, all within the same unified simulation framework.
+\item
+  The way the authors handle the transition between miscible and immiscible states through the concept of "miscibility" as a continuous parameter is particularly clever. This allows for partial mixing effects that are difficult to achieve with previous approaches, creating visually compelling results like alcohol mixing partially with water while remaining separated from oil.
+\end{enumerate}
+
+\textbf{What did you not like about the paper?}
+
+The paper focuses primarily on the visual aspects of fluid mixing without addressing some of the chemical accuracy of real fluid interactions. While this is appropriate for computer graphics applications, the simplified model doesn't capture complex phenomena like chemical reactions between fluids or temperature-dependent mixing behaviors, which limits its scientific application and realism in certain scenarios.
+
+\textbf{What questions do you have for the author about their research?}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Have you explored extending your mixing model to include temperature effects, which can significantly affect how fluids mix in the real world? For instance, hot and cold fluids often exhibit different mixing behaviors due to convection.
+\item
+  Could your approach be augmented to simulate chemical reactions between fluids, where the mixing process might create new substances with different properties than the original components?
+\end{enumerate}
+
+\end{document}
